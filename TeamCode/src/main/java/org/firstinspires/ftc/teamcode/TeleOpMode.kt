@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.primary
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Claw
+import org.firstinspires.ftc.teamcode.MainLift
 import org.firstinspires.ftc.teamcode.MecanumDrive
 
 
@@ -23,6 +23,7 @@ class TeleOpMode : LinearOpMode() {
         //Call Init Functions (make sure to add "this")
         MecanumDrive.initDrive(this)
         Claw.initClaw(this)
+        MainLift.initLift(this)
         // init commands here
 
         //Wait for start
@@ -34,6 +35,7 @@ class TeleOpMode : LinearOpMode() {
             //Tick Commands Here
             MecanumDrive.updateDrive()
             Claw.updateClaw()
+            MainLift.updateLift()
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()
