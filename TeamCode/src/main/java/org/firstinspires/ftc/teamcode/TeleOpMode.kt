@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Claw
 import org.firstinspires.ftc.teamcode.MainLift
 import org.firstinspires.ftc.teamcode.MecanumDrive
+import org.firstinspires.ftc.teamcode.Raiser
 
 
 @TeleOp(name = "9880 TeleOpMode") //change string for display name
@@ -24,6 +25,7 @@ class TeleOpMode : LinearOpMode() {
         MecanumDrive.initDrive(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
+        Raiser.initRaiser(this)
         // init commands here
 
         //Wait for start
@@ -36,6 +38,7 @@ class TeleOpMode : LinearOpMode() {
             MecanumDrive.updateDrive()
             Claw.updateClaw()
             MainLift.updateLift()
+            Raiser.updateRaiser()
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()
