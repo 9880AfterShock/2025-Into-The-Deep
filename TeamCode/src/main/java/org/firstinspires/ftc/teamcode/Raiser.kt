@@ -42,7 +42,7 @@ object Raiser { //Prefix for commands
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
 
         motor.setPower(1.0) //turn motor on
-        motor.targetPosition = (targetDegrees*encoderTicks*gearRatio).toInt()
+        motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
         opmode.telemetry.addData("Lift target position", targetDegrees) //Set telemetry
     }
 
