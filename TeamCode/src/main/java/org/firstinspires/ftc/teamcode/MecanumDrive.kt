@@ -8,12 +8,15 @@ import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMa
 import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry
 import com.qualcomm.robotcore.util.Range
 
-object DriveTemplate { //Prefix for commands
+object MecanumDrive { //Prefix for commands
     private lateinit var leftRear: DcMotor //init motor vars
     private lateinit var leftFront: DcMotor
     private lateinit var rightRear: DcMotor
     private lateinit var rightFront: DcMotor
     lateinit var opmode: OpMode //opmode var innit
+    var currentSpeedDivider = 1.0 //for slow mode
+    private var slowModeButtonCurrentlyPressed = false
+    private var slowModeButtonPreviouslyPressed = false
     fun initDrive(opmode: OpMode){ //init motors
         leftRear = opmode.hardwareMap.get(DcMotor::class.java, "leftRear") //motor config names
         leftFront = opmode.hardwareMap.get(DcMotor::class.java,"leftFront")
@@ -41,13 +44,36 @@ object DriveTemplate { //Prefix for commands
         rightBackPower = Range.clip(drive - turn + strafe, -1.0, 1.0)
         rightFrontPower = Range.clip(drive - turn - strafe, -1.0, 1.0)
 
+        updateSpeed(3.0) //set to the slowmode divider
 
-        leftRear.power = leftBackPower
-        leftFront.power = leftFrontPower
-        rightRear.power = rightBackPower
-        rightFront.power = rightFrontPower
+        leftRear.power = leftBackPower/currentSpeedDivider
+        leftFront.power = leftFrontPower/currentSpeedDivider
+        rightRear.power = rightBackPower/currentSpeedDivider
+        rightFront.power = rightFrontPower/currentSpeedDivider
 
-        opmode.telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftBackPower, rightBackPower)
+        opmode.telemetry.addData("Front Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower)
+        opmode.telemetry.addData("Back Motors", "left (%.2f), right (%.2f)", leftBackPower, rightBackPower)
+        opmode.telemetry.addData("Divider", "divider (%.2f)", currentSpeedDivider)
+    }
+    private fun updateSpeed(speedDivider: Double){
+        // Check the status of the speed button on the gamepad
+        slowModeButtonCurrentlyPressed = (opmode.gamepad1.right_trigger.toDouble() == 0.0)//change this to change the button
+
+        // If the button state is different than what it was, then act
+        if (slowModeButtonCurrentlyPressed != slowModeButtonPreviouslyPressed) {
+            // If the button is (now) down
+            if (slowModeButtonCurrentlyPressed) {
+                swapSpeed(speedDivider)
+            }
+        }
+        slowModeButtonPreviouslyPressed = slowModeButtonCurrentlyPressed
     }
 
+    private fun swapSpeed(speedDivider: Double) {
+        if (currentSpeedDivider == speedDivider) {
+            currentSpeedDivider == 1.0
+        } else {
+            currentSpeedDivider == speedDivider
+        }
+    }
 }

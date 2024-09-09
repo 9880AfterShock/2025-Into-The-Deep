@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.util.ElapsedTime
+import org.firstinspires.ftc.teamcode.MecanumDrive
 
 
 @TeleOp(name = "9880 TeleOpMode") //change string for display name
@@ -19,7 +20,7 @@ class TeleOpMode : LinearOpMode() {
         telemetry.update()
 
         //Call Init Functions (make sure to add "this")
-        //    LiftTemplate.initLift(this)
+        MecanumDrive.initDrive(this)
         // init commands here
 
         //Wait for start
@@ -29,6 +30,7 @@ class TeleOpMode : LinearOpMode() {
         //Running Loop
         while (opModeIsActive()) {
             //Tick Commands Here
+            MecanumDrive.updateDrive()
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()
