@@ -51,6 +51,7 @@ object MacanumDriveTrain { //Prefix for commands
         opmode.telemetry.addData("Front Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower)
         opmode.telemetry.addData("Back Motors", "left (%.2f), right (%.2f)", leftBackPower, rightBackPower)
         opmode.telemetry.addData("Divider", "divider (%.2f)", currentSpeedDivider)
+        opmode.telemetry.addData("trig", opmode.gamepad1.right_trigger.toDouble())
     }
     private fun updateSpeed(speedDivider: Double){
         // Check the status of the speed button on the gamepad
