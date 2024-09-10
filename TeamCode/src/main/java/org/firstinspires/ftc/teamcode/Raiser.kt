@@ -7,7 +7,7 @@ object Raiser { //Prefix for commands
     private lateinit var motor: DcMotor //Init Motor Var
     var targetDegrees = 0.0 //starting Position
     @JvmField
-    val encoderTicks = 384.5 //calculate your own ratio
+    val encoderTicks = 1425.1 //calculate your own ratio
     val gearRatio = 100/20
     val upPos = 45.0 //in degrees
     val downPos = 0.0 //in degrees
@@ -16,16 +16,18 @@ object Raiser { //Prefix for commands
     private var upButtonCurrentlyPressed = false
     private var upButtonPreviouslyPressed = false
     lateinit var opmode: OpMode //opmode var innit
+    var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initRaiser(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
         motor.targetPosition = (targetDegrees*encoderTicks).toInt()
-        motor.mode = motorMode
+        motor.mode = encoderMode //reset encoder
+        motor.mode = motorMode //enable motor mode
         this.opmode = opmode
     }
     fun updateRaiser() {
-        downButtonCurrentlyPressed = opmode.gamepad2.y //can change controls
-        upButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
+        downButtonCurrentlyPressed = opmode.gamepad2.b //can change controls
+        upButtonCurrentlyPressed = opmode.gamepad2.y //can change controls
 
         // If the button state is different than what it was, then act
         if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) {
