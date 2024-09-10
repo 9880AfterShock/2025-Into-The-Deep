@@ -3,12 +3,9 @@ package org.firstinspires.ftc.teamcode
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap
-import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry
 import com.qualcomm.robotcore.util.Range
 
-object MecanumDrive { //Prefix for commands
+object MacanumDriveTrain { //Prefix for commands
     private lateinit var leftRear: DcMotor //init motor vars
     private lateinit var leftFront: DcMotor
     private lateinit var rightRear: DcMotor
