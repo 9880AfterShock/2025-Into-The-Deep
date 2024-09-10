@@ -19,7 +19,7 @@ object MainLift { //Prefix for commands
     lateinit var opmode: OpMode //opmode var innit
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initLift(opmode: OpMode){ //init motors
-        lift = opmode.hardwareMap.get(DcMotor::class.java, "MainLift") //config name
+        lift = opmode.hardwareMap.get(DcMotor::class.java, "mainLift") //config name
         lift.targetPosition = (pos*encoderTicks).toInt()
         lift.mode = motorMode
         this.opmode = opmode
