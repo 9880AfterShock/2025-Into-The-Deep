@@ -40,12 +40,13 @@ object MainLift { //Prefix for commands
 
         pos += currentSpeed
 
-        if (pos<maxPos) {
+        if (pos>maxPos) {
             pos = maxPos
         }
-        if (pos>minPos) {
+        if (pos<minPos) {
             pos = minPos
         }
+
         lift.power = 1.0 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()
         opmode.telemetry.addData("Main Lift target position", pos) //Set telemetry

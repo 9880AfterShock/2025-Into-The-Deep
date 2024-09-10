@@ -56,21 +56,18 @@ object MacanumDriveTrain { //Prefix for commands
         // Check the status of the speed button on the gamepad
         slowModeButtonCurrentlyPressed = (opmode.gamepad1.right_trigger.toDouble() != 0.0)//change this to change the button
 
-        // If the button state is different than what it was, then act
-        if (slowModeButtonCurrentlyPressed != slowModeButtonPreviouslyPressed) {
-            // If the button is (now) down
-            if (slowModeButtonCurrentlyPressed) {
-                swapSpeed(speedDivider)
-            }
+        // If the button was pressed
+        if (slowModeButtonCurrentlyPressed && (slowModeButtonCurrentlyPressed != slowModeButtonPreviouslyPressed)) {
+            swapSpeed(speedDivider)
         }
         slowModeButtonPreviouslyPressed = slowModeButtonCurrentlyPressed
     }
 
-    private fun swapSpeed(speedDivider: Double) {
-        if (currentSpeedDivider == speedDivider) {
+    private fun swapSpeed(speedDividerInner: Double) {
+        if (currentSpeedDivider == speedDividerInner) {
             currentSpeedDivider == 1.0
         } else {
-            currentSpeedDivider == speedDivider
+            currentSpeedDivider == speedDividerInner
         }
     }
 }
