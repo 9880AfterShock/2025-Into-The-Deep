@@ -11,6 +11,7 @@ object Raiser { //Prefix for commands
     val gearRatio = 100/20
     val upPos = 45.0 //in degrees
     val downPos = 0.0 //in degrees
+    var status = 0 // bandaid
     private var downButtonCurrentlyPressed = false
     private var downButtonPreviouslyPressed = false
     private var upButtonCurrentlyPressed = false
@@ -33,9 +34,11 @@ object Raiser { //Prefix for commands
         if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) {
             if (downButtonCurrentlyPressed && !downButtonPreviouslyPressed) {
                 targetDegrees = downPos //in degrees
+                status = 1 //bandaid
             } else {
                 if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
                     targetDegrees = upPos
+                    status = 0 //bandaid
                     }
                 }
             }
@@ -44,8 +47,10 @@ object Raiser { //Prefix for commands
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
 
         motor.setPower(1.0) //turn motor on
-        motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
-        opmode.telemetry.addData("Lift target position", targetDegrees) //Set telemetry
+        motor.targetPosition = (-837 * status) //bandaid
+        //motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
+        opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
+        opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)
     }
 
 }

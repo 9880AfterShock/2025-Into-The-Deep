@@ -50,7 +50,6 @@ object MainLift { //Prefix for commands
         lift.power = 1.0 //turn motor on
         lift.targetPosition = (pos*encoderTicks).toInt()
         opmode.telemetry.addData("Main Lift target position", pos) //Set telemetry
-        opmode.telemetry.addData("cur speed",currentSpeed)
     }
 
 }
