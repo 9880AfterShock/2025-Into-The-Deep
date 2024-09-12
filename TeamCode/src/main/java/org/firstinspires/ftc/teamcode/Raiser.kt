@@ -46,11 +46,16 @@ object Raiser { //Prefix for commands
         downButtonPreviouslyPressed = downButtonCurrentlyPressed
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
 
-        motor.setPower(1.0) //turn motor on
+        if (motor.currentPosition == -837) { //bandaid fix
+            motor.power = 0.0
+        } else {
+            motor.power = 1.0
+        }
+        //motor.setPower(1.0) //turn motor on
         motor.targetPosition = (-837 * status) //bandaid
         //motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
         opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
-        opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)
+        //opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)
     }
 
 }
