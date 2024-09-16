@@ -10,7 +10,6 @@ object Wrist {
     var positions = arrayOf (0, 90, 180) //positions
     @JvmField
     var initPos = 0 //innit pos prob 200-220 or so
-    @JvmField
     var currentPos = initPos //innit pos
     private var state = "Init"
     private var backwardWristButtonCurrentlyPressed = false
@@ -20,6 +19,7 @@ object Wrist {
 
     lateinit var opmode:OpMode
     fun initWrist(opmode: OpMode){
+        var currentPos = initPos //reset pos
         wrist = opmode.hardwareMap.get(Servo::class.java, "Wrist") //config name
         this.opmode = opmode
     }
@@ -31,7 +31,7 @@ object Wrist {
         if (currentPos == initPos && direction == "forward") {
             currentPos = positions[positions.size-1]
         } else {
-            if (direction == "forward") {
+            if (direction == "forward" && !(positions.indexOf(currentPos) == positions[0]) || (positions.indexOf(currentPos) == positions[positions.size-1])) { //set limits
                 currentPos = positions[positions.indexOf(currentPos)-1]
             } else {
                 currentPos = positions[positions.indexOf(currentPos)+1]
