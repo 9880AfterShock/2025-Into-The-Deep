@@ -11,11 +11,11 @@ object MainLift { //Prefix for commands
     var currentSpeed = 0.0 //Starting speed, WHY ARE YOU MAKING A FALLING LIFT???
     @JvmField
     var speed = 0.01 //update speed
-    val encoderTicks = 1425.1 //calculate your own ratio
+    val encoderTicks = 537.7 //calculate your own ratio
     @JvmField
     var minPos = 0.0 //bottom position
     @JvmField
-    var maxPos = 7.2 //top position
+    var maxPos = 7.0 //top position
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode

@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.Claw
 import org.firstinspires.ftc.teamcode.MainLift
 import org.firstinspires.ftc.teamcode.MacanumDriveTrain
 import org.firstinspires.ftc.teamcode.Raiser
+import org.firstinspires.ftc.teamcode.Wrist
 
 @TeleOp(name = "9880 TeleOpMode Into-the-Deep") //change string for display name
 //Toggle Disabled to make appear in list or not.
@@ -22,9 +23,10 @@ class TeleOpMode : LinearOpMode() {
 
         //Call Init Functions (make sure to add "this")
         MacanumDriveTrain.initDrive(this)
-        //Claw.initClaw(this)
+        Claw.initClaw(this)
         MainLift.initLift(this)
         Raiser.initRaiser(this)
+        Wrist.initWrist(this)
         // init commands here
 
         //Wait for start
@@ -35,9 +37,10 @@ class TeleOpMode : LinearOpMode() {
         while (opModeIsActive()) {
             //Tick Commands Here
             MacanumDriveTrain.updateDrive()
-            //Claw.updateClaw()
+            Claw.updateClaw()
             MainLift.updateLift()
             Raiser.updateRaiser()
+            Wrist.updateWrist()
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()
