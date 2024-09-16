@@ -9,7 +9,7 @@ object Claw {
     @JvmField
     var openPos = 0.0 //the positions
     @JvmField
-    var closePos = 0.2 //the positions
+    var closePos = 1.0 //the positions
     private var state = "Open"
     private var clawButtonCurrentlyPressed = false
     private var clawButtonPreviouslyPressed = false
