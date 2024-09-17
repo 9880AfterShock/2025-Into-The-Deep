@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Wrist
 //@Disabled
 class TeleOpMode : LinearOpMode() {
     private val runtime = ElapsedTime()
+    private var test = 0
     //Make Motor Vars
 
     override fun runOpMode() {
@@ -22,7 +23,7 @@ class TeleOpMode : LinearOpMode() {
         telemetry.update()
 
         //Call Init Functions (make sure to add "this")
-        //MecanumDriveTrain.initDrive(this)
+        MecanumDriveTrain.initDrive(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
         Raiser.initRaiser(this)
@@ -36,11 +37,12 @@ class TeleOpMode : LinearOpMode() {
         //Running Loop
         while (opModeIsActive()) {
             //Tick Commands Here
-            //MecanumDriveTrain.updateDrive()
+            //MecanumDriveTrain.updateDrive() //remove for testing
             Claw.updateClaw()
             MainLift.updateLift()
             Raiser.updateRaiser()
             Wrist.updateWrist()
+
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
             telemetry.update()

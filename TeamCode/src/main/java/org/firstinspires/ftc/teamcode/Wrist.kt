@@ -7,13 +7,11 @@ import com.qualcomm.robotcore.hardware.Servo
 object Wrist {
     private lateinit var wrist: Servo
     @JvmField
-    var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
+    var positions = arrayOf (0, 90, 180) //positions, most fzorward to most backward
     @JvmField
     var initPos = 200 //innit pos prob 200-220 or so
-    var currentPos = initPos //innit pos
+    var currentPos = -1 //innit pos represent
     private var state = "Init"
-    private var debug = 0
-    private var debugevenmoreagain = 0
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
     private var forwardWristButtonCurrentlyPressed = false
@@ -22,7 +20,7 @@ object Wrist {
     lateinit var opmode:OpMode
 
     fun initWrist(opmode: OpMode){
-        currentPos = initPos //reset pos
+        currentPos = -1 //reset pos to innit, change for teleop
         wrist = opmode.hardwareMap.get(Servo::class.java, "Wrist") //config name
         this.opmode = opmode
     }
@@ -45,25 +43,29 @@ object Wrist {
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
-        opmode.telemetry.addData("times updated", debug)
-        opmode.telemetry.addData("times beyond gamepad", debugevenmoreagain)
     }
 
     private fun changePosition(direction: String){
-        if (currentPos == initPos && direction == "forward") {
-            currentPos = positions[positions.size-1] //if innited, go to last in array
+        if (currentPos == -1 && direction == "forward") {
+            currentPos = positions.size-1 //if inited, go to last in array
         } else {
-            if (direction == "forward" && currentPos != positions[0]) {
-                currentPos == positions[positions.indexOf(currentPos) - 1]
-            }
-            if (direction == "backward" && currentPos != positions[positions.size - 1]) {
-                currentPos == positions[positions.indexOf(currentPos) + 1]
+            if (currentPos != -1) {
+                if (direction == "forward" && positions[currentPos] != positions[0]) {
+                    currentPos -= 1
+                }
+                if (direction == "backward" && currentPos != positions.size-1) {
+                    currentPos += 1
+                }
             }
         }
-        updatePosition(currentPos)
+        updatePosition(positions[currentPos])
     }
     private fun updatePosition(targetPosition: Int){
-        wrist.position = targetPosition.toDouble()/270
+        if (targetPosition == -1) {
+            wrist.position = initPos.toDouble() / 270 //change both
+        } else {
+            wrist.position = targetPosition.toDouble() / 270 //change both
+        }
         state = targetPosition.toString()
     }
 }
