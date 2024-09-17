@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.util.Range
 
-object MacanumDriveTrain { //Prefix for commands
+object MecanumDriveTrain { //Prefix for commands
     private lateinit var leftRear: DcMotor //init motor vars
     private lateinit var leftFront: DcMotor
     private lateinit var rightRear: DcMotor

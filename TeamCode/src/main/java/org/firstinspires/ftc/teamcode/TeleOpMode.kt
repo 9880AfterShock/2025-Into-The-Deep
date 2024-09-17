@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Claw
 import org.firstinspires.ftc.teamcode.MainLift
-import org.firstinspires.ftc.teamcode.MacanumDriveTrain
+import org.firstinspires.ftc.teamcode.MecanumDriveTrain
 import org.firstinspires.ftc.teamcode.Raiser
 import org.firstinspires.ftc.teamcode.Wrist
 
@@ -22,7 +22,7 @@ class TeleOpMode : LinearOpMode() {
         telemetry.update()
 
         //Call Init Functions (make sure to add "this")
-        MacanumDriveTrain.initDrive(this)
+        MecanumDriveTrain.initDrive(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
         Raiser.initRaiser(this)
@@ -36,7 +36,7 @@ class TeleOpMode : LinearOpMode() {
         //Running Loop
         while (opModeIsActive()) {
             //Tick Commands Here
-            MacanumDriveTrain.updateDrive()
+            MecanumDriveTrain.updateDrive()
             Claw.updateClaw()
             MainLift.updateLift()
             Raiser.updateRaiser()

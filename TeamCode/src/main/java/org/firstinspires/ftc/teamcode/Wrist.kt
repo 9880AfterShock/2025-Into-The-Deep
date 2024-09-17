@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo
 object Wrist {
     private lateinit var wrist: Servo
     @JvmField
-    var positions = arrayOf (0, 90, 180) //positions
+    var positions = arrayOf (0, 90, 180) //positions, most forward to most backward
     @JvmField
-    var initPos = 0 //innit pos prob 200-220 or so
+    var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = initPos //innit pos
     private var state = "Init"
     private var backwardWristButtonCurrentlyPressed = false
@@ -18,27 +18,32 @@ object Wrist {
     private var forwardWristButtonPreviouslyPressed = false
 
     lateinit var opmode:OpMode
+
     fun initWrist(opmode: OpMode){
-        var currentPos = initPos //reset pos
+        currentPos = initPos //reset pos
         wrist = opmode.hardwareMap.get(Servo::class.java, "Wrist") //config name
         this.opmode = opmode
     }
+
     private fun updatePosition(targetPosition: Int){
         wrist.position = targetPosition.toDouble()/270
         state = targetPosition.toString()
     }
+
     private fun changePosition(direction: String){
         if (currentPos == initPos && direction == "forward") {
-            currentPos = positions[positions.size-1]
+            currentPos = positions[positions.size-1] //if innited, go to last in array
         } else {
-            if (direction == "forward" && !(positions.indexOf(currentPos) == positions[0]) || (positions.indexOf(currentPos) == positions[positions.size-1])) { //set limits
-                currentPos = positions[positions.indexOf(currentPos)-1]
-            } else {
-                currentPos = positions[positions.indexOf(currentPos)+1]
+            if (direction == "forward" && currentPos != positions[0]) {
+                currentPos == positions[positions.indexOf(currentPos)+1]
+            }
+            if (direction == "backward") {
+                positions.indexOf(currentPos)
             }
         }
         updatePosition(currentPos)
     }
+
     fun updateWrist() {
         opmode.telemetry.addData("Wrist State", state)
         opmode.telemetry.addData("Wrist POSITION", wrist.position)
@@ -49,7 +54,7 @@ object Wrist {
         backwardWristButtonCurrentlyPressed = opmode.gamepad1.left_bumper //change this to change the button
 
 
-        if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //saftey mechanism
+        if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //safety mechanism
             if (forwardWristButtonCurrentlyPressed && !forwardWristButtonPreviouslyPressed) {
                 changePosition("forward")
             }
@@ -60,6 +65,5 @@ object Wrist {
 
         forwardWristButtonPreviouslyPressed = forwardWristButtonCurrentlyPressed
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
-
     }
 }
