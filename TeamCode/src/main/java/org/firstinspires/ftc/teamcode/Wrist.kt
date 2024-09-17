@@ -12,6 +12,8 @@ object Wrist {
     var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = initPos //innit pos
     private var state = "Init"
+    private var debug = 0
+    private var debugmore = 0
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
     private var forwardWristButtonCurrentlyPressed = false
@@ -28,22 +30,21 @@ object Wrist {
     private fun updatePosition(targetPosition: Int){
         wrist.position = targetPosition.toDouble()/270
         state = targetPosition.toString()
-        opmode.telemetry.addData("Wrist State", state)
-        opmode.telemetry.addData("Wrist POSITION", wrist.position)
-        opmode.telemetry.addData("workingC" 5)
+        debug += 1
     }
 
     private fun changePosition(direction: String){
+
         if (currentPos == initPos && direction == "forward") {
             currentPos = positions[positions.size-1] //if innited, go to last in array
         } else {
             if (direction == "forward" && currentPos != positions[0]) {
-                currentPos == positions[positions.indexOf(currentPos)-1]
-                opmode.telemetry.addData("workingB" 4)
+                debugmore = +1
+                currentPos == positions[positions.indexOf(currentPos) - 1]
             }
-            if (direction == "backward" && currentPos != positions[positions.size-1]) {
-                currentPos == positions[positions.indexOf(currentPos)+1]
-                opmode.telemetry.addData("workingB" 5)
+            if (direction == "backward" && currentPos != positions[positions.size - 1]) {
+                debugmore = +1
+                currentPos == positions[positions.indexOf(currentPos) + 1]
             }
         }
         updatePosition(currentPos)
@@ -57,15 +58,17 @@ object Wrist {
         if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //safety mechanism
             if (forwardWristButtonCurrentlyPressed && !forwardWristButtonPreviouslyPressed) {
                 changePosition("forward")
-                opmode.telemetry.addData("workingA", 1)
             }
             if (backwardWristButtonCurrentlyPressed && !backwardWristButtonPreviouslyPressed) {
                 changePosition("backward")
-                opmode.telemetry.addData("workingA", 2)
             }
         }
 
         forwardWristButtonPreviouslyPressed = forwardWristButtonCurrentlyPressed
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
+
+        opmode.telemetry.addData("Wrist State", state)
+        opmode.telemetry.addData("times updated", debug)
+        opmode.telemetry.addData("times forwarded/backwarded", debugmore)
     }
 }

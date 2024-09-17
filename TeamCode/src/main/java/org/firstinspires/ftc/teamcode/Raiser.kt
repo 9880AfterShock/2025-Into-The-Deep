@@ -52,7 +52,7 @@ object Raiser { //Prefix for commands
             motor.power = 1.0
         }
         //motor.setPower(1.0) //turn motor on
-        motor.targetPosition = (-837 * status) //bandaid
+        motor.targetPosition = (-837 * status) //bandaid, starts up rn
         //motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
         opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
         //opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)

@@ -22,7 +22,7 @@ class TeleOpMode : LinearOpMode() {
         telemetry.update()
 
         //Call Init Functions (make sure to add "this")
-        MecanumDriveTrain.initDrive(this)
+        //MecanumDriveTrain.initDrive(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
         Raiser.initRaiser(this)
@@ -36,7 +36,7 @@ class TeleOpMode : LinearOpMode() {
         //Running Loop
         while (opModeIsActive()) {
             //Tick Commands Here
-            MecanumDriveTrain.updateDrive()
+            //MecanumDriveTrain.updateDrive()
             Claw.updateClaw()
             MainLift.updateLift()
             Raiser.updateRaiser()
