@@ -13,7 +13,7 @@ object Wrist {
     var currentPos = initPos //innit pos
     private var state = "Init"
     private var debug = 0
-    private var debugmore = 0
+    private var debugevenmoreagain = 0
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
     private var forwardWristButtonCurrentlyPressed = false
@@ -27,48 +27,43 @@ object Wrist {
         this.opmode = opmode
     }
 
-    private fun updatePosition(targetPosition: Int){
-        wrist.position = targetPosition.toDouble()/270
-        state = targetPosition.toString()
-        debug += 1
-    }
-
-    private fun changePosition(direction: String){
-
-        if (currentPos == initPos && direction == "forward") {
-            currentPos = positions[positions.size-1] //if innited, go to last in array
-        } else {
-            if (direction == "forward" && currentPos != positions[0]) {
-                debugmore = +1
-                currentPos == positions[positions.indexOf(currentPos) - 1]
-            }
-            if (direction == "backward" && currentPos != positions[positions.size - 1]) {
-                debugmore = +1
-                currentPos == positions[positions.indexOf(currentPos) + 1]
-            }
-        }
-        updatePosition(currentPos)
-    }
-
     fun updateWrist() {
         // Check the status of the claw button on the game pad
         forwardWristButtonCurrentlyPressed = opmode.gamepad1.right_bumper //change these to change the button
         backwardWristButtonCurrentlyPressed = opmode.gamepad1.left_bumper
 
-        if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //safety mechanism
-            if (forwardWristButtonCurrentlyPressed && !forwardWristButtonPreviouslyPressed) {
-                changePosition("forward")
-            }
-            if (backwardWristButtonCurrentlyPressed && !backwardWristButtonPreviouslyPressed) {
-                changePosition("backward")
-            }
+        //if (!(forwardWristButtonCurrentlyPressed && backwardWristButtonCurrentlyPressed)) { //safety mechanism
+        if (forwardWristButtonCurrentlyPressed && !forwardWristButtonPreviouslyPressed) {
+            changePosition("forward")
         }
+        if (backwardWristButtonCurrentlyPressed && !backwardWristButtonPreviouslyPressed) {
+            changePosition("backward")
+        }
+        //}
 
         forwardWristButtonPreviouslyPressed = forwardWristButtonCurrentlyPressed
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
         opmode.telemetry.addData("times updated", debug)
-        opmode.telemetry.addData("times forwarded/backwarded", debugmore)
+        opmode.telemetry.addData("times beyond gamepad", debugevenmoreagain)
+    }
+
+    private fun changePosition(direction: String){
+        if (currentPos == initPos && direction == "forward") {
+            currentPos = positions[positions.size-1] //if innited, go to last in array
+        } else {
+            if (direction == "forward" && currentPos != positions[0]) {
+                currentPos == positions[positions.indexOf(currentPos) - 1]
+            }
+            if (direction == "backward" && currentPos != positions[positions.size - 1]) {
+                currentPos == positions[positions.indexOf(currentPos) + 1]
+            }
+        }
+        updatePosition(currentPos)
+    }
+    private fun updatePosition(targetPosition: Int){
+        wrist.position = targetPosition.toDouble()/270
+        state = targetPosition.toString()
     }
 }
