@@ -37,7 +37,7 @@ class TeleOpMode : LinearOpMode() {
         //Running Loop
         while (opModeIsActive()) {
             //Tick Commands Here
-            //MecanumDriveTrain.updateDrive() //remove for testing
+            MecanumDriveTrain.updateDrive() //remove for testing
             Claw.updateClaw()
             MainLift.updateLift()
             Raiser.updateRaiser()
