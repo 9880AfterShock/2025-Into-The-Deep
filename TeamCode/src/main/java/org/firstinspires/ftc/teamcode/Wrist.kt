@@ -24,7 +24,7 @@ object Wrist {
         this.opmode = opmode
     }
     private fun updatePosition(targetPosition: Int){
-        wrist.position = targetPosition.toDouble()
+        wrist.position = targetPosition.toDouble()/270
         state = targetPosition.toString()
     }
     private fun changePosition(direction: String){
@@ -41,6 +41,8 @@ object Wrist {
     }
     fun updateWrist() {
         opmode.telemetry.addData("Wrist State", state)
+        opmode.telemetry.addData("Wrist POSITION", wrist.position)
+
 
         // Check the status of the claw button on the gamepad
         forwardWristButtonCurrentlyPressed = opmode.gamepad1.right_bumper //change this to change the button
