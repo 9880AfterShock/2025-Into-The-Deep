@@ -35,10 +35,10 @@ object Wrist {
             currentPos = positions[positions.size-1] //if innited, go to last in array
         } else {
             if (direction == "forward" && currentPos != positions[0]) {
-                currentPos == positions[positions.indexOf(currentPos)+1]
+                currentPos == positions[positions.indexOf(currentPos)-1]
             }
-            if (direction == "backward") {
-                positions.indexOf(currentPos)
+            if (direction == "backward" && currentPos != positions[positions.size-1]) {
+                currentPos == positions[positions.indexOf(currentPos)+1]
             }
         }
         updatePosition(currentPos)
