@@ -49,7 +49,7 @@ object Wrist {
         opmode.telemetry.addData("Wrist POSITION", wrist.position)
 
 
-        // Check the status of the claw button on the gamepad
+        // Check the status of the claw button on the game pad
         forwardWristButtonCurrentlyPressed = opmode.gamepad1.right_bumper //change this to change the button
         backwardWristButtonCurrentlyPressed = opmode.gamepad1.left_bumper //change this to change the button
 
