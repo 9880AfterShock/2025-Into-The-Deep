@@ -23,13 +23,12 @@ object Claw {
         claw.position = openPos
         state = "Open"
     }
-    private fun close(){
+    fun close(){
         claw.position = closePos
         state = "Close"
     }
     private fun swap(){
         if (state == "Open") {
-
             close()
         } else {
             open()

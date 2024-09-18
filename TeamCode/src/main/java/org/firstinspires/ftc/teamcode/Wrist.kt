@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
+import kotlin.concurrent.thread
 
 
 object Wrist {
@@ -53,6 +54,11 @@ object Wrist {
             if (currentPos != -1) {
                 if (direction == "forward" && positions[currentPos] != positions[0]) {
                     currentPos -= 1
+                    if (currentPos == 0) {
+                        thread{
+                            Claw.close()
+                        }
+                    }
                 }
                 if (direction == "backward" && currentPos != positions.size-1) {
                     currentPos += 1
