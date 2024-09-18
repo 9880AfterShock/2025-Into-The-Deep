@@ -20,9 +20,11 @@ object Claw {
         this.opmode = opmode
         state = "Closed"
     }
-    private fun open(){
-        claw.position = openPos
-        state = "Open"
+    private fun open() {
+        if (Wrist.currentPos != 0) { //prevent from opening if far down
+            claw.position = openPos
+            state = "Open"
+        }
     }
     fun close(){
         claw.position = closePos //claw doesnt move
@@ -48,7 +50,6 @@ object Claw {
             }
         }
         clawButtonPreviouslyPressed = clawButtonCurrentlyPressed
-
 
     }
 }

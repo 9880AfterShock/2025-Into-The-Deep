@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.hardware.Servo
-import kotlin.concurrent.thread
+//import kotlin.concurrent.thread not needed lol
 
 
 object Wrist {
@@ -11,8 +11,7 @@ object Wrist {
     var positions = arrayOf (0, 90, 180) //positions, most fzorward to most backward
     @JvmField
     var initPos = 200 //innit pos prob 200-220 or so
-    var currentPos = -1 //innit pos represent
-    var debugvar = 0
+    var currentPos = -1 //innit pos placeholder
     private var state = "Init"
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
@@ -22,7 +21,7 @@ object Wrist {
     lateinit var opmode:OpMode
 
     fun initWrist(opmode: OpMode){
-        currentPos = -1 //reset pos to innit, change for teleop
+        currentPos = -1 //reset pos to innit, change for teleop after auto
         wrist = opmode.hardwareMap.get(Servo::class.java, "Wrist") //config name
         this.opmode = opmode
     }
@@ -45,7 +44,6 @@ object Wrist {
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
-        opmode.telemetry.addData("debug", debugvar)
     }
 
     private fun changePosition(direction: String){
@@ -58,7 +56,6 @@ object Wrist {
                     currentPos -= 1
                     if (currentPos == 0) {
                         Claw.close()
-                        debugvar = 1
                     }
                 }
                 if (direction == "backward" && currentPos != positions.size-1) {
