@@ -48,6 +48,7 @@ object Wrist {
     private fun changePosition(direction: String){
         if (currentPos == -1 && direction == "forward") {
             currentPos = positions.size-1 //if inited, go to last in array
+            updatePosition(positions[currentPos])
         } else {
             if (currentPos != -1) {
                 if (direction == "forward" && positions[currentPos] != positions[0]) {
@@ -56,9 +57,9 @@ object Wrist {
                 if (direction == "backward" && currentPos != positions.size-1) {
                     currentPos += 1
                 }
+                updatePosition(positions[currentPos])
             }
         }
-        updatePosition(positions[currentPos])
     }
     private fun updatePosition(targetPosition: Int){
         if (targetPosition == -1) {

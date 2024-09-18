@@ -21,7 +21,8 @@ object Raiser { //Prefix for commands
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initRaiser(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
-        motor.targetPosition = (targetDegrees*encoderTicks).toInt()
+        //motor.targetPosition = (targetDegrees*encoderTicks).toInt()
+        motor.targetPosition = (status*-837) //bandaid
         motor.mode = encoderMode //reset encoder
         motor.mode = motorMode //enable motor mode
         this.opmode = opmode
