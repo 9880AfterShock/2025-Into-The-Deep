@@ -48,7 +48,7 @@ object Raiser { //Prefix for commands
         downButtonPreviouslyPressed = downButtonCurrentlyPressed
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
 
-        if (motor.currentPosition == bandaid && status == 1) { //bandaid fix
+        if (motor.currentPosition < bandaid && status == 1) { //bandaid fix
             motor.power = 0.0
         } else {
             motor.power = 1.0
