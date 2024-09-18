@@ -35,7 +35,7 @@ object Raiser { //Prefix for commands
 
         // If the button state is different than what it was, then act
         if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) {
-            if (downButtonCurrentlyPressed && !downButtonPreviouslyPressed) {
+            if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed) && MainLift.lift.currentPosition <= MainLift.maxLowPos) { //make so it cannot be lowered beyond the limit of the size constraints
                 targetDegrees = downPos //in degrees
                 status = 1 //bandaid
             }

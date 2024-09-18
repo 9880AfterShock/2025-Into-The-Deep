@@ -6,16 +6,18 @@ import com.qualcomm.robotcore.hardware.DcMotor
 
 
 object MainLift { //Prefix for commands
-    private lateinit var lift: DcMotor //Init Motor Var
+    lateinit var lift: DcMotor //Init Motor Var
     var pos = 0.0 //starting Position
     var currentSpeed = 0.0 //Starting speed, WHY ARE YOU MAKING A FALLING LIFT???
     @JvmField
     var speed = 0.03 //update speed
     val encoderTicks = 537.7 //calculate your own ratio
     @JvmField
-    var minPos = 0.0 //bottom position
+    var minPos = 0.0 //folded all the way in
     @JvmField
-    var maxPos = 7.0 //top position
+    var maxPos = 7.0 //all the way out at 45° angle
+    @JvmField
+    var maxLowPos = 5.0 //maximum position when lowered
     lateinit var opmode: OpMode //opmode var innit
     var encoderMode: DcMotor.RunMode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
@@ -42,6 +44,9 @@ object MainLift { //Prefix for commands
         pos += currentSpeed
 
         if (pos>maxPos) {
+            pos = maxPos
+        }
+        if (pos>maxLowPos && Raiser.status == 1) {
             pos = maxPos
         }
         if (pos<minPos) {
