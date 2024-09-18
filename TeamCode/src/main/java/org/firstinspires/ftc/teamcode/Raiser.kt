@@ -21,6 +21,7 @@ object Raiser { //Prefix for commands
     var motorMode: DcMotor.RunMode = DcMotor.RunMode.RUN_TO_POSITION //set motor mode
     fun initRaiser(opmode: OpMode){ //init motors
         motor = opmode.hardwareMap.get(DcMotor::class.java, "raiser") //config name
+        status = 0 //reset for the bandaid
         //motor.targetPosition = (targetDegrees*encoderTicks).toInt()
         motor.targetPosition = (status*-837) //bandaid
         motor.mode = encoderMode //reset encoder
@@ -36,18 +37,17 @@ object Raiser { //Prefix for commands
             if (downButtonCurrentlyPressed && !downButtonPreviouslyPressed) {
                 targetDegrees = downPos //in degrees
                 status = 1 //bandaid
-            } else {
-                if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
-                    targetDegrees = upPos
-                    status = 0 //bandaid
-                    }
+            }
+            if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
+                targetDegrees = upPos
+                status = 0 //bandaid
                 }
             }
 
         downButtonPreviouslyPressed = downButtonCurrentlyPressed
         upButtonPreviouslyPressed = upButtonCurrentlyPressed
 
-        if (motor.currentPosition == -837) { //bandaid fix
+        if (motor.currentPosition == -837 && status == 1) { //bandaid fix
             motor.power = 0.0
         } else {
             motor.power = 1.0
@@ -58,5 +58,4 @@ object Raiser { //Prefix for commands
         opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
         //opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)
     }
-
 }
