@@ -12,6 +12,7 @@ object Wrist {
     @JvmField
     var initPos = 200 //innit pos prob 200-220 or so
     var currentPos = -1 //innit pos represent
+    var debugvar = 0
     private var state = "Init"
     private var backwardWristButtonCurrentlyPressed = false
     private var backwardWristButtonPreviouslyPressed = false
@@ -44,6 +45,7 @@ object Wrist {
         backwardWristButtonPreviouslyPressed = backwardWristButtonCurrentlyPressed
 
         opmode.telemetry.addData("Wrist State", state)
+        opmode.telemetry.addData("debug", debugvar)
     }
 
     private fun changePosition(direction: String){
@@ -55,9 +57,8 @@ object Wrist {
                 if (direction == "forward" && positions[currentPos] != positions[0]) {
                     currentPos -= 1
                     if (currentPos == 0) {
-                        thread{
-                            Claw.close()
-                        }
+                        Claw.close()
+                        debugvar = 1
                     }
                 }
                 if (direction == "backward" && currentPos != positions.size-1) {
