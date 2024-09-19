@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo
 object SpecimenClaw {
     private lateinit var claw: Servo
     @JvmField
-    var openPos = 1.0 //the positions
+    var openPos = 0.7 //the positions
     @JvmField
-    var closePos = 0.6 //the positions
+    var closePos = 1.0 //the positions
     private var state = "Closed"
     private var clawButtonCurrentlyPressed = false
     private var clawButtonPreviouslyPressed = false
