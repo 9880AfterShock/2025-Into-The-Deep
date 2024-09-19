@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.MecanumDriveTrain
 import org.firstinspires.ftc.teamcode.Raiser
 import org.firstinspires.ftc.teamcode.SpecimenClaw
 import org.firstinspires.ftc.teamcode.SpecimenLift
+import org.firstinspires.ftc.teamcode.SpecimenSwivel
 import org.firstinspires.ftc.teamcode.Wrist
 
 @TeleOp(name = "9880 TeleOpMode Into-the-Deep") //change string for display name
@@ -33,6 +34,7 @@ class TeleOpMode : LinearOpMode() {
         Wrist.initWrist(this)
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
+        SpecimenSwivel.initSwivel(this)
         // init commands here
 
         //Wait for start
@@ -49,6 +51,7 @@ class TeleOpMode : LinearOpMode() {
             Wrist.updateWrist()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
+            SpecimenSwivel.updateSwivel()
 
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")

@@ -21,10 +21,8 @@ object SpecimenClaw {
         state = "Closed"
     }
     private fun open() {
-        if (Wrist.currentPos != 0) { //prevent from opening if far down
-            claw.position = openPos
-            state = "Open"
-        }
+        claw.position = openPos
+        state = "Open"
     }
     private fun close(){
         claw.position = closePos //claw doesnt move
