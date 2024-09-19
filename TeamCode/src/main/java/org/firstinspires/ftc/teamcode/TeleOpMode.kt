@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.SpecimenClaw
 import org.firstinspires.ftc.teamcode.SpecimenLift
 import org.firstinspires.ftc.teamcode.SpecimenSwivel
 import org.firstinspires.ftc.teamcode.Wrist
+import org.firstinspires.ftc.teamcode.SampleColorSensor
 
 @TeleOp(name = "9880 TeleOpMode Into-the-Deep") //change string for display name
 //Toggle Disabled to make appear in list or not.
@@ -32,6 +33,7 @@ class TeleOpMode : LinearOpMode() {
         MainLift.initLift(this)
         Raiser.initRaiser(this)
         Wrist.initWrist(this)
+        SampleColorSensor.initColorSensor(this, 2.0F)
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
         //SpecimenSwivel.initSwivel(this) //only in auto
@@ -49,9 +51,9 @@ class TeleOpMode : LinearOpMode() {
             MainLift.updateLift()
             Raiser.updateRaiser()
             Wrist.updateWrist()
+            SampleColorSensor.updateColorSensor()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
-            //SpecimenSwivel.updateSwivel() //only in auto
 
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
