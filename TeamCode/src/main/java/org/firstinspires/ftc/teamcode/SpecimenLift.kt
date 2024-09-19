@@ -29,11 +29,11 @@ object SpecimenLift { //Prefix for commands
     }
     fun updateLift(){
 //can change controls
-        if (opmode.gamepad2.dpad_up && !opmode.gamepad2.dpad_down) {
+        if (opmode.gamepad2.right_bumper && !opmode.gamepad2.left_bumper) {
             currentSpeed = speed
         }
         else
-            if (opmode.gamepad2.dpad_down && !opmode.gamepad2.dpad_up) {
+            if (opmode.gamepad2.left_bumper && !opmode.gamepad2.right_bumper) {
                 currentSpeed = -speed
             } else {
                 currentSpeed = 0.0
