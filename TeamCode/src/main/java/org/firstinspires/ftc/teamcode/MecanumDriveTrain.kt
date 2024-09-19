@@ -12,6 +12,7 @@ object MecanumDriveTrain { //Prefix for commands
     private lateinit var rightFront: DcMotor
     lateinit var opmode: OpMode //opmode var innit
     var currentSpeedDivider = 1.0 //for slow mode
+    var debug = 0
     private var slowModeButtonCurrentlyPressed = false
     private var slowModeButtonPreviouslyPressed = false
     fun initDrive(opmode: OpMode){ //init motors
@@ -24,6 +25,8 @@ object MecanumDriveTrain { //Prefix for commands
         leftFront.direction = DcMotorSimple.Direction.REVERSE
         rightRear.direction = (DcMotorSimple.Direction.FORWARD)
         rightFront.direction = (DcMotorSimple.Direction.FORWARD)
+
+        currentSpeedDivider = 1.0
 
         this.opmode = opmode
     }
@@ -51,14 +54,16 @@ object MecanumDriveTrain { //Prefix for commands
         opmode.telemetry.addData("Front Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower)
         opmode.telemetry.addData("Back Motors", "left (%.2f), right (%.2f)", leftBackPower, rightBackPower)
         opmode.telemetry.addData("Divider", "divider (%.2f)", currentSpeedDivider)
+        opmode.telemetry.addData("debug test", debug)
     }
     private fun updateSpeed(speedDivider: Double){
         // Check the status of the speed button on the gamepad
-        slowModeButtonCurrentlyPressed = (opmode.gamepad1.right_trigger.toDouble() != 0.0)//change this to change the button
+        slowModeButtonCurrentlyPressed = (opmode.gamepad1.right_trigger.toDouble() > 0.1)//change this to change the button
 
         // If the button was pressed
-        if (slowModeButtonCurrentlyPressed && (slowModeButtonCurrentlyPressed != slowModeButtonPreviouslyPressed)) {
+        if (slowModeButtonCurrentlyPressed && !slowModeButtonPreviouslyPressed) {
             swapSpeed(speedDivider)
+            debug = 1
         }
         slowModeButtonPreviouslyPressed = slowModeButtonCurrentlyPressed
     }
