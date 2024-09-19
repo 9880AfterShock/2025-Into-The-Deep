@@ -38,7 +38,7 @@ object SpecimenClaw {
         }
     }
     fun updateClaw() {
-        opmode.telemetry.addData("Claw State", state)
+        opmode.telemetry.addData("Specimen Claw State", state)
         // Check the status of the claw button on the gamepad
         clawButtonCurrentlyPressed = opmode.gamepad1.b //change this to change the button
 
