@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo
 object SpecimenSwivel {
     private lateinit var swivel: Servo
     @JvmField
-    var openPos = 0.7 //the positions
+    var outPos = 1.0 //the positions
     @JvmField
-    var closePos = 1.0 //the positions
+    var inPos = 0.7 //the positions
     private var state = "In"
     private var swivelButtonCurrentlyPressed = false
     private var swivelButtonPreviouslyPressed = false
@@ -21,11 +21,11 @@ object SpecimenSwivel {
         state = "In"
     }
     private fun moveOut() {
-        swivel.position = openPos
+        swivel.position = outPos
         state = "Out"
     }
     private fun moveIn(){
-        swivel.position = closePos //swivel doesnt move
+        swivel.position = inPos //swivel doesnt move
         state = "In" //this runs
     }
     private fun swap(){
@@ -38,7 +38,7 @@ object SpecimenSwivel {
     fun updateSwivel() {
         opmode.telemetry.addData("Swivel Position", state)
         // Check the status of the claw button on the gamepad
-        swivelButtonCurrentlyPressed = opmode.gamepad1.y //change this to change the button
+        //swivelButtonCurrentlyPressed = opmode.gamepad1.y //change this to change the button //disabled for safety
 
         // If the button state is different than what it was, then act
         if (swivelButtonCurrentlyPressed != swivelButtonPreviouslyPressed) {

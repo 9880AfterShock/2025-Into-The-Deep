@@ -34,7 +34,7 @@ class TeleOpMode : LinearOpMode() {
         Wrist.initWrist(this)
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
-        SpecimenSwivel.initSwivel(this)
+        //SpecimenSwivel.initSwivel(this) //only in auto
         // init commands here
 
         //Wait for start
@@ -51,7 +51,7 @@ class TeleOpMode : LinearOpMode() {
             Wrist.updateWrist()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
-            SpecimenSwivel.updateSwivel()
+            //SpecimenSwivel.updateSwivel() //only in auto
 
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
