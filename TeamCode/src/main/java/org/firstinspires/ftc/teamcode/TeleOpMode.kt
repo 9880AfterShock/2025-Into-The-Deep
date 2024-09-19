@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.primary
 
+import android.widget.GridLayout.Spec
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.util.ElapsedTime
@@ -7,6 +8,7 @@ import org.firstinspires.ftc.teamcode.Claw
 import org.firstinspires.ftc.teamcode.MainLift
 import org.firstinspires.ftc.teamcode.MecanumDriveTrain
 import org.firstinspires.ftc.teamcode.Raiser
+import org.firstinspires.ftc.teamcode.SpecimenClaw
 import org.firstinspires.ftc.teamcode.SpecimenLift
 import org.firstinspires.ftc.teamcode.Wrist
 
@@ -30,6 +32,7 @@ class TeleOpMode : LinearOpMode() {
         Raiser.initRaiser(this)
         Wrist.initWrist(this)
         SpecimenLift.initLift(this)
+        SpecimenClaw.initClaw(this)
         // init commands here
 
         //Wait for start
@@ -45,6 +48,7 @@ class TeleOpMode : LinearOpMode() {
             Raiser.updateRaiser()
             Wrist.updateWrist()
             SpecimenLift.updateLift()
+            SpecimenClaw.updateClaw()
 
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
