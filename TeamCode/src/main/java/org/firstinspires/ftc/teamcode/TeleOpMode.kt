@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.util.ElapsedTime
 import org.firstinspires.ftc.teamcode.Claw
+import org.firstinspires.ftc.teamcode.Config
 import org.firstinspires.ftc.teamcode.MainLift
 import org.firstinspires.ftc.teamcode.MecanumDriveTrain
 import org.firstinspires.ftc.teamcode.Raiser
@@ -28,6 +29,7 @@ class TeleOpMode : LinearOpMode() {
         telemetry.update()
 
         //Call Init Functions (make sure to add "this")
+        Config.initControls(this)
         MecanumDriveTrain.initDrive(this)
         Claw.initClaw(this)
         MainLift.initLift(this)
@@ -45,6 +47,7 @@ class TeleOpMode : LinearOpMode() {
 
         //Running Loop
         while (opModeIsActive()) {
+            Config.updateControls() // go here to change controls
             SpecimenSwivel.updateSwivel() //will only do anything first tick
             //Tick Commands Here
             MecanumDriveTrain.updateDrive() //remove for testing
