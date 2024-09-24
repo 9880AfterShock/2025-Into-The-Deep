@@ -47,7 +47,7 @@ object MainLift { //Prefix for commands
             pos = maxPos
         }
         if (pos>maxLowPos && Raiser.status == 1) {
-            pos = maxPos
+            pos = maxLowPos
         }
         if (pos<minPos) {
             pos = minPos
