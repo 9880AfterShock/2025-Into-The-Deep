@@ -10,6 +10,7 @@ object SpecimenSwivel {
     var outPos = 1.0 //the positions
     @JvmField
     var inPos = 0.7 //the positions
+    var inited = false
     private var state = "In"
     private var swivelButtonCurrentlyPressed = false
     private var swivelButtonPreviouslyPressed = false
@@ -19,6 +20,7 @@ object SpecimenSwivel {
         swivel = opmode.hardwareMap.get(Servo::class.java, "Specimen Swivel") //config name
         this.opmode = opmode
         state = "In"
+        inited = false
     }
     private fun moveOut() {
         swivel.position = outPos
@@ -35,7 +37,7 @@ object SpecimenSwivel {
             moveOut()
         }
     }
-    fun updateSwivel() {
+    fun OLDupdateSwivel() {
         opmode.telemetry.addData("Swivel Position", state)
         // Check the status of the claw button on the gamepad
         //swivelButtonCurrentlyPressed = opmode.gamepad1.y //change this to change the button //disabled for safety
@@ -49,5 +51,11 @@ object SpecimenSwivel {
         }
         swivelButtonPreviouslyPressed = swivelButtonCurrentlyPressed
 
+    }
+    fun updateSwivel() {
+        if (!inited) {
+            moveOut()
+            inited = true
+        }
     }
 }

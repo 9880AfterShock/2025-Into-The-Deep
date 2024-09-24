@@ -36,7 +36,7 @@ class TeleOpMode : LinearOpMode() {
         SampleColorSensor.initColorSensor(this, 2.0F)
         SpecimenLift.initLift(this)
         SpecimenClaw.initClaw(this)
-        //SpecimenSwivel.initSwivel(this) //only in auto
+        SpecimenSwivel.initSwivel(this) //added because changes
         // init commands here
 
         //Wait for start
@@ -45,6 +45,7 @@ class TeleOpMode : LinearOpMode() {
 
         //Running Loop
         while (opModeIsActive()) {
+            SpecimenSwivel.updateSwivel() //will only do anything first tick
             //Tick Commands Here
             MecanumDriveTrain.updateDrive() //remove for testing
             Claw.updateClaw()
