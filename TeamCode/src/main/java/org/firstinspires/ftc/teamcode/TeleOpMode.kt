@@ -41,7 +41,7 @@ class TeleOpMode : LinearOpMode() {
 
         //Wait for start
         waitForStart()
-        //SpecimenSwivel.moveOut()
+        SpecimenSwivel.moveOut()
         runtime.reset()
 
         //Running Loop
@@ -55,7 +55,7 @@ class TeleOpMode : LinearOpMode() {
             SampleColorSensor.updateColorSensor()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
-            SpecimenSwivel.updateSwivel()
+            //SpecimenSwivel.updateSwivel()
 
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")
