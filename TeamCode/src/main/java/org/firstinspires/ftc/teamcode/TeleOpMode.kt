@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.primary
 
+import android.widget.GridLayout.Spec
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.util.ElapsedTime
@@ -40,11 +41,11 @@ class TeleOpMode : LinearOpMode() {
 
         //Wait for start
         waitForStart()
+        //SpecimenSwivel.moveOut()
         runtime.reset()
 
         //Running Loop
         while (opModeIsActive()) {
-            SpecimenSwivel.updateSwivel() //will only do anything first tick
             //Tick Commands Here
             MecanumDriveTrain.updateDrive() //remove for testing
             Claw.updateClaw()
@@ -54,6 +55,7 @@ class TeleOpMode : LinearOpMode() {
             SampleColorSensor.updateColorSensor()
             SpecimenLift.updateLift()
             SpecimenClaw.updateClaw()
+            SpecimenSwivel.updateSwivel()
 
             // Show the elapsed time (and other telemetry) on driver station
             telemetry.addData("Status", "Run Time: $runtime")

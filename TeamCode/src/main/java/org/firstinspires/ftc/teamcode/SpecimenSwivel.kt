@@ -22,7 +22,7 @@ object SpecimenSwivel {
         state = "In"
         inited = false
     }
-    private fun moveOut() {
+    fun moveOut() {
         swivel.position = outPos
         state = "Out"
     }
@@ -37,10 +37,10 @@ object SpecimenSwivel {
             moveOut()
         }
     }
-    fun OLDupdateSwivel() {
+    fun updateSwivel() {
         opmode.telemetry.addData("Swivel Position", state)
         // Check the status of the claw button on the gamepad
-        //swivelButtonCurrentlyPressed = opmode.gamepad1.y //change this to change the button //disabled for safety
+        swivelButtonCurrentlyPressed = opmode.gamepad1.y //change this to change the button //disabled for safety
 
         // If the button state is different than what it was, then act
         if (swivelButtonCurrentlyPressed != swivelButtonPreviouslyPressed) {
@@ -50,12 +50,5 @@ object SpecimenSwivel {
             }
         }
         swivelButtonPreviouslyPressed = swivelButtonCurrentlyPressed
-
-    }
-    fun updateSwivel() {
-        if (!inited) {
-            moveOut()
-            inited = true
-        }
     }
 }
