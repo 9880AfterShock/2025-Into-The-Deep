@@ -36,11 +36,11 @@ object Raiser { //Prefix for commands
         // If the button state is different than what it was, then act
         if (!(downButtonCurrentlyPressed && upButtonCurrentlyPressed)) {
             if ((downButtonCurrentlyPressed && !downButtonPreviouslyPressed) && MainLift.lift.currentPosition/MainLift.encoderTicks <= MainLift.maxLowPos) { //make so it cannot be lowered beyond the limit of the size constraints
-                targetDegrees = downPos //in degrees
+                //targetDegrees = downPos //in degrees
                 status = 1 //bandaid
             }
             if (upButtonCurrentlyPressed && !upButtonPreviouslyPressed) {
-                targetDegrees = upPos
+                //targetDegrees = upPos
                 status = 0 //bandaid
                 }
             }
@@ -56,8 +56,8 @@ object Raiser { //Prefix for commands
         //motor.setPower(1.0) //turn motor on
         motor.targetPosition = (bandaid * status) //bandaid, starts up rn
         //motor.targetPosition = (targetDegrees*encoderTicks*gearRatio/360).toInt()
-        opmode.telemetry.addData("encoder ticks", motor.currentPosition)
-        opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
+        opmode.telemetry.addData("Raiser Position (0 is up, 1 is down)", motor.currentPosition) //bandaid
+        //disabled for band aid opmode.telemetry.addData("Raiser target position", targetDegrees) //Set telemetry
         //opmode.telemetry.addData("encoder ticks", motor.currentPosition) //testing -837 (bandaid)
     }
 }

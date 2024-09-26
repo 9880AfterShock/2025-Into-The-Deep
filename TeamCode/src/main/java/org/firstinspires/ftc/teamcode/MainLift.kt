@@ -15,7 +15,7 @@ object MainLift { //Prefix for commands
     @JvmField
     var minPos = 0.0 //folded all the way in
     @JvmField
-    var maxPos = 7.0 //all the way out at 45° angle
+    var maxPos = 7.0 //all the way up
     @JvmField
     var maxLowPos = 3.5 //maximum position when lowered
     lateinit var opmode: OpMode //opmode var innit
